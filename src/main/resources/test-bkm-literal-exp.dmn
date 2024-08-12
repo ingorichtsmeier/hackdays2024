@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_036dr66" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="BKMLiteralExpression" name="Decision 1">
+    <variable id="InformationItem_0v69uz9" name="summe" typeRef="number" />
+    <knowledgeRequirement id="KnowledgeRequirement_0g4g6ma">
+      <requiredKnowledge href="#BusinessKnowledgeModel_1v3iyiz" />
+    </knowledgeRequirement>
+    <literalExpression id="LiteralExpression_0lstgqd">
+      <text>Sum(x,y)</text>
+    </literalExpression>
+  </decision>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1v3iyiz" name="Sum">
+    <variable id="InformationItem_0s2nlvi" name="Sum" typeRef="number" />
+    <encapsulatedLogic id="FunctionDefinition_1urcerq">
+      <formalParameter name="a" typeRef="number" />
+      <formalParameter name="b" typeRef="number" />
+      <literalExpression id="LiteralExpression_1ds2vkl">
+        <text>a + b</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_0n95qzl" dmnElementRef="BKMLiteralExpression">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_12smw5o" dmnElementRef="KnowledgeRequirement_0g4g6ma">
+        <di:waypoint x="250" y="337" />
+        <di:waypoint x="250" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1pt16cy" dmnElementRef="BusinessKnowledgeModel_1v3iyiz">
+        <dc:Bounds height="46" width="135" x="182" y="337" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

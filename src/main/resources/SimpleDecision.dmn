@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="SimpleDRD" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="SimpleDecision" name="Simple Decision">
+    <informationRequirement id="InformationRequirement_1nuvp82">
+      <requiredInput href="#InputData_148u9k9" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_12787ia">
+      <requiredInput href="#InputData_1rf3oo2" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1078psa">
+      <requiredInput href="#InputData_18lltog" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0mug5e2">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>Name</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0tpe81f">
+        <inputExpression id="LiteralExpression_1tpyy3v" typeRef="string">
+          <text>Gender</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1wz68gp">
+          <text>"Male","Female"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0nj0wkh">
+        <inputExpression id="LiteralExpression_1matx84" typeRef="number">
+          <text>Children</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="Description" typeRef="string" biodi:width="378" />
+      <rule id="DecisionRule_0kkvev9">
+        <inputEntry id="UnaryTests_1a765wu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qg7rt5">
+          <text>"Male"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sgl8tp">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uoqhcv">
+          <text>Name + " is a dad of " + string(decimal(Children,0)) + " children."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k7mxuy">
+        <inputEntry id="UnaryTests_1p1ov1h">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04nirqr">
+          <text>"Female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tvuy7a">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lqmabh">
+          <text>Name + " is a mother of " + string(decimal(Children,0)) + " children."</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_148u9k9" name="Name" />
+  <inputData id="InputData_1rf3oo2" name="Gender" />
+  <inputData id="InputData_18lltog" name="Children" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="SimpleDecision">
+        <dc:Bounds height="80" width="180" x="370" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1xv880s" dmnElementRef="InputData_148u9k9">
+        <dc:Bounds height="45" width="125" x="397" y="337" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0cugisa" dmnElementRef="InformationRequirement_1nuvp82">
+        <di:waypoint x="460" y="337" />
+        <di:waypoint x="460" y="200" />
+        <di:waypoint x="460" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0t9a39g" dmnElementRef="InputData_1rf3oo2">
+        <dc:Bounds height="45" width="125" x="637" y="337" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0mql845" dmnElementRef="InformationRequirement_12787ia">
+        <di:waypoint x="700" y="337" />
+        <di:waypoint x="505" y="200" />
+        <di:waypoint x="505" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0lp1b3x" dmnElementRef="InputData_18lltog">
+        <dc:Bounds height="45" width="125" x="157" y="337" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_053jsri" dmnElementRef="InformationRequirement_1078psa">
+        <di:waypoint x="220" y="337" />
+        <di:waypoint x="415" y="200" />
+        <di:waypoint x="415" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

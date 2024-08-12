@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="SimpleDRD" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="SimpleDecisionJsonInput" name="Simple Decision">
+    <informationRequirement id="InformationRequirement_119i1jx">
+      <requiredInput href="#InputData_134vcxy" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0mug5e2">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>Person.Name</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0tpe81f">
+        <inputExpression id="LiteralExpression_1tpyy3v" typeRef="string">
+          <text>Person.Gender</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1wz68gp">
+          <text>"Male","Female"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0nj0wkh">
+        <inputExpression id="LiteralExpression_1matx84" typeRef="number">
+          <text>Person.Children</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="Description" typeRef="string" biodi:width="378" />
+      <rule id="DecisionRule_0kkvev9">
+        <inputEntry id="UnaryTests_1a765wu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qg7rt5">
+          <text>"Male"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sgl8tp">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uoqhcv">
+          <text>Person.Name + " is a dad of " + string(decimal(Person.Children,0)) + " children."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k7mxuy">
+        <inputEntry id="UnaryTests_1p1ov1h">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04nirqr">
+          <text>"Female"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tvuy7a">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lqmabh">
+          <text>Person.Name + " is a mother of " + string(decimal(Person.Children,0)) + " children."</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_134vcxy" name="Person" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="SimpleDecisionJsonInput">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0odejp2" dmnElementRef="InputData_134vcxy">
+        <dc:Bounds height="45" width="125" x="187" y="337" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1gkai1r" dmnElementRef="InformationRequirement_119i1jx">
+        <di:waypoint x="250" y="337" />
+        <di:waypoint x="250" y="200" />
+        <di:waypoint x="250" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

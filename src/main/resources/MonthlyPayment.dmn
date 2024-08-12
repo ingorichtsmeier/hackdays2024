@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_01evwe1" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="MonthlyPayment" name="Monthly payment">
+    <informationRequirement id="InformationRequirement_07915wo">
+      <requiredInput href="#InputData_192x5w5" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1r3v99o">
+      <requiredInput href="#InputData_1lmp1or" />
+    </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_0htxkgr">
+      <requiredKnowledge href="#BusinessKnowledgeModel_12zr9pv" />
+    </knowledgeRequirement>
+    <decisionTable id="DecisionTable_1fzthgc">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>Loan.amount</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1bwfdim">
+        <inputExpression id="LiteralExpression_0vgg9dj" typeRef="number">
+          <text>Loan.rate</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0wd2ewl">
+        <inputExpression id="LiteralExpression_1bnf0yr" typeRef="number">
+          <text>Loan.term</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0chxiga">
+        <inputExpression id="LiteralExpression_0fbnlw7" typeRef="number">
+          <text>fee</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="montlyPayment" typeRef="number" />
+      <rule id="DecisionRule_1p1kr2u">
+        <inputEntry id="UnaryTests_1l2z4v0">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gf40zm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09qikas">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0aesb7d">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07m6ele">
+          <text>decimal(PMT(Loan.amount, Loan.rate, Loan.term)+fee, 2)</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <businessKnowledgeModel id="BusinessKnowledgeModel_12zr9pv" name="PMT">
+    <variable id="InformationItem_0ad4di5" name="PMT" typeRef="number" />
+    <encapsulatedLogic id="FunctionDefinition_0vdel1l">
+      <formalParameter name="p" typeRef="number" />
+      <formalParameter name="r" typeRef="number" />
+      <formalParameter name="n" typeRef="number" />
+      <literalExpression id="LiteralExpression_190rqt9">
+        <text>(p*r/12)/(1-(1+r/12)**-n)</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <inputData id="InputData_192x5w5" name="Loan" />
+  <inputData id="InputData_1lmp1or" name="fee" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="MonthlyPayment">
+        <dc:Bounds height="80" width="180" x="260" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1vzvbtz" dmnElementRef="KnowledgeRequirement_0htxkgr">
+        <di:waypoint x="234" y="337" />
+        <di:waypoint x="326" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1mj32kn" dmnElementRef="BusinessKnowledgeModel_12zr9pv">
+        <dc:Bounds height="46" width="135" x="152" y="337" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0k55owo" dmnElementRef="InputData_192x5w5">
+        <dc:Bounds height="45" width="125" x="338" y="338" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0o19axo" dmnElementRef="InputData_1lmp1or">
+        <dc:Bounds height="45" width="125" x="518" y="338" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0ygjyc3" dmnElementRef="InformationRequirement_07915wo">
+        <di:waypoint x="401" y="338" />
+        <di:waypoint x="320" y="200" />
+        <di:waypoint x="320" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1gsnp84" dmnElementRef="InformationRequirement_1r3v99o">
+        <di:waypoint x="581" y="338" />
+        <di:waypoint x="380" y="200" />
+        <di:waypoint x="380" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

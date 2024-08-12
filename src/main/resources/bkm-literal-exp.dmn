@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1ng92t9" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <businessKnowledgeModel id="BusinessKnowledgeModel_1pqie4x" name="Description">
+    <variable id="InformationItem_0zlzy0f" name="Description" typeRef="string" />
+    <encapsulatedLogic id="FunctionDefinition_0e5mxps">
+      <formalParameter name="Gender" typeRef="string" />
+      <formalParameter name="Name" typeRef="string" />
+      <formalParameter name="Children" typeRef="number" />
+      <literalExpression id="LiteralExpression_0jl5np8">
+        <text>if (Gender = "Male") then Name + " is a dad of " + string(decimal(Children,0)) + " children." else if Gender = "Female" then Name + " is a mother of " + string(decimal(Children,0)) + " children." else ""</text>
+      </literalExpression>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+  <inputData id="InputData_1qqtbix" name="Person" />
+  <decision id="PersonDescription" name="Person&#39;s Description">
+    <informationRequirement id="InformationRequirement_1e2kol9">
+      <requiredInput href="#InputData_1qqtbix" />
+    </informationRequirement>
+    <knowledgeRequirement id="KnowledgeRequirement_02l0t47">
+      <requiredKnowledge href="#BusinessKnowledgeModel_1pqie4x" />
+    </knowledgeRequirement>
+    <decisionTable id="DecisionTable_0g00x95">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="Any">
+          <text>Person</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="Description" typeRef="string" />
+      <rule id="DecisionRule_14b79uo">
+        <inputEntry id="UnaryTests_1o4jf6k">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03ads2w">
+          <text>Description(Person.Gender, Person.Name, Person.Children)</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_1i1q37n" dmnElementRef="BusinessKnowledgeModel_1pqie4x">
+        <dc:Bounds height="46" width="135" x="432" y="117" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1148ke5" dmnElementRef="InputData_1qqtbix">
+        <dc:Bounds height="45" width="125" x="188" y="238" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape dmnElementRef="PersonDescription">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1j10jq3" dmnElementRef="KnowledgeRequirement_02l0t47">
+        <di:waypoint x="432" y="140" />
+        <di:waypoint x="340" y="140" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1f13wuy" dmnElementRef="InformationRequirement_1e2kol9">
+        <di:waypoint x="251" y="238" />
+        <di:waypoint x="250" y="200" />
+        <di:waypoint x="250" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

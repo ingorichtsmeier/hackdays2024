@@ -1,0 +1,1931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_1819AB06-86BD-4FC0-8CC4-351FDD15B716" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_B94AADE9-B95D-412B-8044-E1A8E35199CB" name="Elterngeld" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_1819AB06-86BD-4FC0-8CC4-351FDD15B716">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_F2FDF729-5125-4AE6-B3D9-91D81BEA5748" name="Neugeborene" isCollection="false">
+    <dmn:itemComponent id="_6CB97273-689F-4FBE-8B04-6A52281B15C6" name="Anzahl" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_A0C0F756-FFFC-4D2C-A33A-422E304CA0B4" name="WochenZuFrühGeboren" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="range" id="_0C74DDC4-FFE9-44A6-A41E-98C8B04B54A1">
+        <dmn:text>[0..16]</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_EE4E43BB-3E6A-489B-8822-38DFB25EA5A2" name="Geschwister" isCollection="false">
+    <dmn:itemComponent id="_384878D5-6169-4DAF-9DD5-125C1407D7FB" name="Insert a name" isCollection="false">
+      <dmn:typeRef>Any</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_1EC43118-4656-4DD6-8644-A6C12A4C2011" name="AnzahlGeschwisterUnterDreiJahren" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_AE49E765-14E3-44FF-A84A-3673C3C2A544" name="AnzahlGeschwisterDreiBisFünfJahre" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_16F6F345-28FE-40B4-BEF8-9037BB58CF8A" name="Anspruchsbedingung" isCollection="false">
+    <dmn:itemComponent id="_AE54EDDA-1147-4B9E-BEFA-2024ADBCF299" name="WohnsitzInnerhalbDeutschlands" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_6215EB75-7BFF-4E06-A2A0-21245129757F" name="KindImHaushalt" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_888B9866-BE9A-43A9-BD55-64D7EFB7DE40" name="BetreuungUndErziehung" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_80796FCB-9BD5-4BD9-AC78-BF3375133525" name="Elternzeitvariante" isCollection="false">
+    <dmn:itemComponent id="_893155F6-6030-47E2-92B2-6806B470A129" name="MonateBasiselterngeld" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_05FDB716-FE35-4418-BF52-985FC25618FC" name="MonateElterngeldPlus" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_1D7596E0-AD33-4C11-981E-F19C1A0435FE" name="Partnerschaftsbonus" isCollection="false">
+    <dmn:itemComponent id="_C99C6AA7-67DB-458E-9958-69B68CC673F1" name="Bonus beziehen" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_523B9105-561D-48C4-BA1B-0D793FCCBBC5" name="Monate" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+      <dmn:allowedValues kie:constraintType="enumeration" id="_DFD19700-7A6F-4670-A4E5-DADB351EF638">
+        <dmn:text>null, 2, 3, 4</dmn:text>
+      </dmn:allowedValues>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_5EFFEB98-CA5A-47C6-B9E2-0616949C29B1" name="Sonderanspruchsgrund" isCollection="false">
+    <dmn:itemComponent id="_DB100AE1-66C7-4CD7-B4CD-630DCBF1A11C" name="unterliegtDemSGBIV4" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_CF3F2EBB-8648-41FD-895B-AD02AD19D867" name="dienstlichVorübergehendImAusland" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_19C59130-5109-4480-8AF0-9B8DCC7C500F" name="zwischenstaatlichOderÜberstaatlichTätig" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_4C6D73AD-76C1-404D-BD93-6CA88CF91E04" name="Entwicklungshelfer" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_BB272A97-6643-4C05-AD23-19964D806D15" name="Missionar" isCollection="false">
+      <dmn:typeRef>boolean</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_732675B0-ABE3-438C-A46E-3C1D2711B748" name="Einkommen" isCollection="false">
+    <dmn:itemComponent id="_A19484DE-6D7D-4451-B84A-014916A6460D" name="Arbeitswochenstunden" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_FD7C46D4-5B28-431D-96F9-01C4ED084A5C" name="ArbeitswochenstundenPartnerschaftsbonus" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_84874ED5-EC0C-467A-8073-E69D633554B6" name="EinkommenVorDerGeburt" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_C56DF986-6A7C-4B2A-8D7E-823171436A61" name="EinkommenNachDerGeburt" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_A8E1B490-3B97-48A4-B38F-5401CC3E5510" name="EinkommenPartnerschaftsbonus" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_A3097BCE-1B85-40DF-B5A8-04067F752520" name="Elter" isCollection="false">
+    <dmn:itemComponent id="_5D181DBE-C5C6-4413-B56D-3B410C54BC3F" name="Anspruchsbedingungen" isCollection="false">
+      <dmn:typeRef>Anspruchsbedingung</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_DB8118C3-3213-48D9-8E70-3246ECE772D4" name="Sonderanspruchsgründe" isCollection="false">
+      <dmn:typeRef>Sonderanspruchsgrund</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_5BFA59AE-0EE0-42F5-820B-744F1DAB0152" name="Einkommen" isCollection="false">
+      <dmn:typeRef>Einkommen</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_2AD0FA80-9F85-4ADE-BE72-BBF035C9B11D" name="Elternzeitvarianten" isCollection="false">
+      <dmn:typeRef>Elternzeitvariante</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_83450DE4-0CE6-4B58-A5DA-E0E26EB06599" name="GradRechtlicherVerwandtschaft" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_7C27C388-BDF5-4782-A3C7-CC261E4C3C3C" name="Eltern" isCollection="true">
+    <dmn:typeRef>Elter</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_41979266-C555-433F-8BC1-560386E91470" name="sss" isCollection="false">
+    <dmn:itemComponent id="_5E849ED3-A108-4BE2-938D-1FFE04945F9B" name="Insert a name" isCollection="false">
+      <dmn:typeRef>Any</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:knowledgeSource id="_F700AF5D-94AE-4F66-B77E-6CE5487778D5" name="BEEG §1 Abs 1" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/__1.html" name="BEEG §1"/>
+    </dmn:extensionElements>
+    <dmn:type>Gesetzestext</dmn:type>
+  </dmn:knowledgeSource>
+  <dmn:knowledgeSource id="_8D0EB318-1718-4CA1-B5B5-226E5FB8DDD9" name="BEEG §2" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/__2.html" name="BEEG §2"/>
+    </dmn:extensionElements>
+    <dmn:type>Gesetzestext</dmn:type>
+  </dmn:knowledgeSource>
+  <dmn:knowledgeSource id="_92D42D68-7E95-4467-AB2F-5E143859E326" name="BEEG §1 Abs 2" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/__1.html" name="BEEG §1"/>
+    </dmn:extensionElements>
+    <dmn:type>Gesetzestext</dmn:type>
+  </dmn:knowledgeSource>
+  <dmn:inputData id="_F32A3373-74B9-4666-981B-7CD0D64838DC" name="Neugeborene">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6A8D2890-2C75-44A6-8103-3F7EE7A8418F" name="Neugeborene" typeRef="Neugeborene"/>
+  </dmn:inputData>
+  <dmn:inputData id="_9CC1DDF9-6F88-4B7B-B9DF-1392AA6F105C" name="Geschwister">
+    <dmn:extensionElements/>
+    <dmn:variable id="_347E3FEE-22E4-4B0A-9FB4-E69C17CC9E31" name="Geschwister" typeRef="Geschwister"/>
+  </dmn:inputData>
+  <dmn:inputData id="_2149641E-8A70-4AE7-A07A-F4BEE11E9311" name="Eltern">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3FEA2960-F46D-4262-8627-CDFA24D471A7" name="Eltern" typeRef="Eltern"/>
+  </dmn:inputData>
+  <dmn:decision id="_1498108C-9C36-4BA5-B659-45B762AA4C05" name="HöheDesAnspruchs">
+    <dmn:extensionElements/>
+    <dmn:variable id="_787759FA-FA70-497D-9455-9701C78B4955" name="HöheDesAnspruchs" typeRef="number"/>
+    <dmn:informationRequirement id="_AE1657BF-70A6-418A-9490-B37E6E66AB9E">
+      <dmn:requiredDecision href="#_65CE9A3E-E87C-453F-A6CD-21AA933E6F35"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_F0D827BD-550F-40A1-AD92-EA00FA79A3F4">
+      <dmn:requiredInput href="#_2149641E-8A70-4AE7-A07A-F4BEE11E9311"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_F8196606-88FE-4BBD-B545-F4DAF72C6DE6">
+      <dmn:requiredKnowledge href="#_22A65FC1-9774-47D1-89B5-A8FF889A491C"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_B825CDA5-5069-4433-86E9-1CB0AAF79AE4">
+      <dmn:text>for i in 1..min(2, count(Eltern)) return
+				Logik Höhe des Anspruchs(Eltern[i].Einkommen) + Geschwisterbonus[i]</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_F57FF75A-F7EF-43EB-9AE5-F66DC1422B86" name="GeschwisterbonusAnspruch">
+    <dmn:extensionElements/>
+    <dmn:variable id="_AC352E3F-A608-4E87-8A21-9565D93F5216" name="GeschwisterbonusAnspruch" typeRef="boolean"/>
+    <dmn:informationRequirement id="_9330B334-11BC-4062-82BE-328EEC32BBDA">
+      <dmn:requiredInput href="#_9CC1DDF9-6F88-4B7B-B9DF-1392AA6F105C"/>
+    </dmn:informationRequirement>
+    <dmn:authorityRequirement id="_A4D45E27-4C23-4782-AE76-D52A41901C91">
+      <dmn:requiredAuthority href="#_1024D432-BC24-47FB-8B02-D08FC2702AAE"/>
+    </dmn:authorityRequirement>
+    <dmn:literalExpression id="_E06A145D-EBDD-471A-A224-384BEF5AE33B">
+      <dmn:text>if
+				Geschwister.AnzahlGeschwisterUnterDreiJahren &gt; 0 or (Geschwister.AnzahlGeschwisterUnterDreiJahren + Geschwister.AnzahlGeschwisterDreiBisFünfJahre) &gt; 1
+				then
+				true
+				else
+				false</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_65CE9A3E-E87C-453F-A6CD-21AA933E6F35" name="Geschwisterbonus">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2F774EAA-D5BE-44CE-B2C3-7FBF9E4245AE" name="Geschwisterbonus" typeRef="number"/>
+    <dmn:informationRequirement id="_BF02AB10-D312-4A6B-8EC1-674BB2FC3CAF">
+      <dmn:requiredInput href="#_2149641E-8A70-4AE7-A07A-F4BEE11E9311"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_CE433DE5-8924-4B73-A320-9F7FBCC9E189">
+      <dmn:requiredDecision href="#_F57FF75A-F7EF-43EB-9AE5-F66DC1422B86"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_A4954BEE-6DD5-4030-AFB6-6E3672BA5897">
+      <dmn:requiredKnowledge href="#_DEC1F43E-1D76-4A48-88DF-1628B7C037C1"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_3445DAB7-AA06-44E1-B36D-32F04B488DFB">
+      <dmn:contextEntry>
+        <dmn:variable id="_B7A7CCCD-519E-4542-82CD-A035C6B1710F" name="Anspruch" typeRef="boolean"/>
+        <dmn:literalExpression id="_059503D7-F1CD-45F0-8C67-0C834E8EDA33">
+          <dmn:text>GeschwisterbonusAnspruch</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_F519DD14-7A2F-45E2-AA69-60FFDA2E1291">
+          <dmn:text>for Elter in 1..min(2, count(Eltern)) return
+						Logik Geschwisterbonus(Anspruch, Eltern[Elter].Einkommen)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:knowledgeSource id="_1024D432-BC24-47FB-8B02-D08FC2702AAE" name="BEEG §2a" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/__2a.html" name="BEEG §2a"/>
+    </dmn:extensionElements>
+    <dmn:type/>
+  </dmn:knowledgeSource>
+  <dmn:decision id="_B4093A7C-7ACD-44A1-AEC2-25353FD4A298" name="AnspruchAufElterngeld">
+    <dmn:extensionElements/>
+    <dmn:variable id="_F52AF4BC-8044-447D-B1D4-3D73906FFA16" name="AnspruchAufElterngeld" typeRef="boolean"/>
+    <dmn:informationRequirement id="_E899F43A-FF5F-4CB6-ABFC-D0659569F74C">
+      <dmn:requiredDecision href="#_E6E816B0-28DD-4798-932F-A0E1FB51C1E2"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_C8A0F368-AB94-4722-960B-76B9BEA6A0DD">
+      <dmn:requiredInput href="#_2149641E-8A70-4AE7-A07A-F4BEE11E9311"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_AD5423E1-1206-4978-88CC-1AB1862EBD76">
+      <dmn:requiredInput href="#_F32A3373-74B9-4666-981B-7CD0D64838DC"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_B7E715D1-F3CF-4A01-87FE-FBA2A6F7447C">
+      <dmn:requiredKnowledge href="#_563C362B-6856-4FE3-AC1A-52E6CE67F833"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_230B4DD8-7182-4555-A4BE-EF6C833A86DC">
+      <dmn:text>for i in 1..min(2, count(Eltern)) return
+				LogikAnspruchAufElterngeld(Eltern[i], Neugeborene, AnspruchSondergrund[i], count(Eltern) = 1)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:decision id="_92B682EF-62D8-4B5C-A599-E1ED984B5985" name="Elterngeld insgesamt">
+    <dmn:extensionElements/>
+    <dmn:variable id="_5AD7150A-66C5-41BA-A672-270315C65200" name="Elterngeld insgesamt" typeRef="number"/>
+    <dmn:informationRequirement id="_6B59B893-A8B3-4117-B3CA-3A0D6684D5A8">
+      <dmn:requiredDecision href="#_B4093A7C-7ACD-44A1-AEC2-25353FD4A298"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_AB25A046-000B-4AD0-99C7-55BA2CB5145C">
+      <dmn:requiredInput href="#_F32A3373-74B9-4666-981B-7CD0D64838DC"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_38848D1E-CE49-49EC-8ED2-3B2C89DCD619">
+      <dmn:requiredInput href="#_2149641E-8A70-4AE7-A07A-F4BEE11E9311"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_4A1763C6-AA6F-4401-BB51-9739B40512F3">
+      <dmn:requiredDecision href="#_1498108C-9C36-4BA5-B659-45B762AA4C05"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_3FC0D3F6-1329-421E-941C-E5C76AC350D8">
+      <dmn:requiredDecision href="#_18B06C56-C99F-419D-9504-7B9E3CBB546A"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_21C0696C-CF26-4BA0-8514-CFA870E4401F">
+      <dmn:requiredInput href="#_3D64BF77-53EE-4796-A57C-FED73D52E370"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_483DD365-065F-4BEA-86E3-B2545409A2B2">
+      <dmn:requiredKnowledge href="#_7D0CBC7D-C453-47D4-877F-99850BEED6B0"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_298AA270-51B8-4875-AA5C-ECFAC7FF031D">
+      <dmn:contextEntry>
+        <dmn:variable id="_4CBEDFDE-4660-405F-9DBF-4B7CEF794198" name="Monate" typeRef="number"/>
+        <dmn:context id="_D0C20F84-4E83-4A63-855C-6E050F30FD6C">
+          <dmn:contextEntry>
+            <dmn:variable id="_768BB3C9-9466-4B63-B237-809D1340B01E" name="Monateliste" typeRef="number"/>
+            <dmn:literalExpression id="_38E162E3-BC32-475F-ACC6-E8D624712FC5">
+              <dmn:text>for i in 1..min(2, count(Eltern)) return
+								Eltern[i].Elternzeitvarianten.MonateBasiselterngeld
+								+ Eltern[i].Elternzeitvarianten.MonateElterngeldPlus/2</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_493CD081-0D31-417B-86C3-08E42C1EBAE0">
+              <dmn:text>if
+								Monateliste != null
+								then
+								sum(Monateliste)
+								else
+								0</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_2EA37930-666D-406A-8CD3-703C606E6AC7" name="Elterngelder" typeRef="number"/>
+        <dmn:literalExpression id="_E7CFFE98-2EDE-4528-A690-3DAA4A68F3FD">
+          <dmn:text>for i in 1..min(2, count(Eltern)) return
+						LogikErgebnis(AnspruchAufElterngeld[i], Monate, HöheDesAnspruchs[i], Eltern[i].Elternzeitvarianten, Neugeborene, Eltern[i].Einkommen)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_C6FFDEE3-FD0B-4E13-9E22-42EDCC0019D4">
+          <dmn:text>if
+						sum(Elterngelder) &gt; 0
+						then
+						sum(Elterngelder) + 300 * (Neugeborene.Anzahl - 1) * Monate + Partnerschaftsbonushöhe
+						else
+						0</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_E6E816B0-28DD-4798-932F-A0E1FB51C1E2" name="AnspruchSondergrund">
+    <dmn:extensionElements/>
+    <dmn:variable id="_8333E558-08EE-4B8F-A19B-006603B0AF12" name="AnspruchSondergrund" typeRef="boolean"/>
+    <dmn:informationRequirement id="_5997F46C-5F7D-4AFD-A232-A1F1B3480CB5">
+      <dmn:requiredInput href="#_2149641E-8A70-4AE7-A07A-F4BEE11E9311"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_CB22F2E6-F0A3-420F-A916-50C9C0661DD1">
+      <dmn:requiredKnowledge href="#_7023505C-940A-411D-AD22-30C52E7DFB46"/>
+    </dmn:knowledgeRequirement>
+    <dmn:knowledgeRequirement id="_AA9EFAB8-E50C-4837-8A99-494DE92F6C19">
+      <dmn:requiredKnowledge href="#_7023505C-940A-411D-AD22-30C52E7DFB46"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_A5CFAFCE-4B5B-474A-9C6A-BF3F17D222FF">
+      <dmn:text>for i in 1..min(2, count(Eltern)) return
+				Logik Anspruch Sondergrund(Eltern[i])</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_7023505C-940A-411D-AD22-30C52E7DFB46" name="Logik Anspruch Sondergrund">
+    <dmn:extensionElements/>
+    <dmn:variable id="_7E8C86D8-1F90-4BEF-BF10-C1E3E37B18B9" name="Logik Anspruch Sondergrund" typeRef="boolean"/>
+    <dmn:encapsulatedLogic id="_D99F2FBC-3E85-499F-A73E-A1F5EB29A922" kind="FEEL">
+      <dmn:formalParameter id="_8A6FBAD0-A1C5-4A9F-8D69-119CB7603A99" name="Elter" typeRef="Elter"/>
+      <dmn:context id="_229252B7-5A66-4544-B09E-67AACBC4EFA1">
+        <dmn:contextEntry>
+          <dmn:variable id="_33A3C96A-C6FD-4287-B1EB-93343799CB4F" name="SGB" typeRef="boolean"/>
+          <dmn:literalExpression id="_9461AB55-4B47-484A-BAD9-E82474DCA89F">
+            <dmn:text>Elter.Sonderanspruchsgründe.unterliegtDemSGBIV4</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0EEFCD74-777E-4F95-A25B-BFA65782C669" name="Ausland" typeRef="boolean"/>
+          <dmn:literalExpression id="_764817AE-16AC-4D9C-BB9D-8DE68FD7B2AC">
+            <dmn:text>Elter.Sonderanspruchsgründe.dienstlichVorübergehendImAusland</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_7D88DB5B-6F70-47E9-97D3-2CADE08434E8" name="Staatsdienst" typeRef="boolean"/>
+          <dmn:literalExpression id="_31DD216D-3E16-4B05-8253-EE28927C8FBC">
+            <dmn:text>Elter.Sonderanspruchsgründe.zwischenstaatlichOderÜberstaatlichTätig</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_7900FA1C-06BB-49B2-8900-DE6FB88C7353" name="Entwicklungshilfe" typeRef="boolean"/>
+          <dmn:literalExpression id="_EB9B482A-9A84-4062-930D-F2BC767F5BC7">
+            <dmn:text>Elter.Sonderanspruchsgründe.Entwicklungshelfer</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_32084D74-6B3A-4AC5-9858-A3A16953E182" name="Missionar" typeRef="boolean"/>
+          <dmn:literalExpression id="_A51C80E6-4C73-43CB-AF1A-A810C35B36D6">
+            <dmn:text>Elter.Sonderanspruchsgründe.Missionar</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_8CB544F1-9F63-4BFE-92EE-D091EC5AF2E8" name="Anspruch" typeRef="boolean"/>
+          <dmn:decisionTable id="_E4F45BD4-296F-4102-86D4-A08774909588" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_94A47D52-EDE0-4891-ABBD-A6EBECDCC1E2">
+              <dmn:inputExpression id="_99788974-C95D-490B-9C29-1CBEC77326E5" typeRef="boolean">
+                <dmn:text>SGB</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_CB055AAF-F416-4D3A-A70B-A50F43AD9782">
+              <dmn:inputExpression id="_434499DA-36E2-4D85-8178-3CC801487739" typeRef="boolean">
+                <dmn:text>Ausland</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_42A6ADC7-54D5-465E-89CE-C1C067900891">
+              <dmn:inputExpression id="_159199EF-3F7A-438E-B911-E822CCDDC3EB" typeRef="boolean">
+                <dmn:text>Staatsdienst</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_36D68D27-F749-4342-B059-CB4474737831">
+              <dmn:inputExpression id="_387565E5-15BF-4ABA-8FC5-6DB013E51D8F" typeRef="boolean">
+                <dmn:text>Entwicklungshilfe</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_76AD6A14-272D-4F2D-80A5-41A255F855AB">
+              <dmn:inputExpression id="_90CB0536-8F5F-4213-8ECB-914D5EDF4802" typeRef="boolean">
+                <dmn:text>Missionar</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_FC5863E7-5C31-44F1-B779-29C5BB44A770"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_D5AF6A0E-5B4A-478F-8637-B1889C68FFAC">
+              <dmn:inputEntry id="_B673A9E5-0DB2-4A99-B61A-0F54578D4524">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_0C847090-00E1-4943-B442-563C46F5F226">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F78C4B33-F937-4BB3-88B4-5322F35EA4D5">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_B650A24E-760D-4F0A-A399-A35FFD68F4D0">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_84A155BF-04EC-4214-A8CC-07ED01837857">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_1E4F8C3A-5FAD-4716-A26A-821357A04654">
+                <dmn:text>false
+								</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>kein Sondergrund trifft zu</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_683C0C33-563D-46B5-BF7A-06A2FD688303">
+              <dmn:inputEntry id="_8E1C7AA0-B25B-4EE6-9EBC-F9443CB9460B">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_DE1E444E-ECCB-45F1-BF0C-042DAEE58EAF">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_CE170DAF-313A-41AE-9C81-67C15F23D8B9">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F01ACA84-AA24-485D-92B4-81807BE654D3">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E83AF1E5-B64B-473A-AD43-E912F0124F73">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_D802FBDE-0EB4-4F65-8590-491197388F21">
+                <dmn:text>true</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>mindestens ein Sondergrund trifft zu</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_BE899C8F-10EB-43FC-B754-C50FE2A39781">
+            <dmn:text>Anspruch</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:authorityRequirement id="_7F9F3286-5634-4EB7-AA34-B141DB9A1A64">
+      <dmn:requiredAuthority href="#_92D42D68-7E95-4467-AB2F-5E143859E326"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_DEC1F43E-1D76-4A48-88DF-1628B7C037C1" name="Logik Geschwisterbonus">
+    <dmn:extensionElements/>
+    <dmn:variable id="_81B49480-E3A8-4FF4-AA69-3F4D3387FA90" name="Logik Geschwisterbonus" typeRef="number"/>
+    <dmn:encapsulatedLogic id="_4A804BFF-3A5D-4F96-969C-78DE00B9E5CF" kind="FEEL">
+      <dmn:formalParameter id="_8AA231E8-9E97-49D3-AABA-D5CF59E22083" name="Anspruch" typeRef="boolean"/>
+      <dmn:formalParameter id="_87028090-4D71-416C-BFF5-9C665C7070E8" name="Einkommen" typeRef="Einkommen"/>
+      <dmn:context id="_EC0FB96B-79A2-4149-AC80-EA0965076C39">
+        <dmn:contextEntry>
+          <dmn:variable id="_1AB5E735-1A2B-412A-877D-1A09BD45D7CF" name="DifferenzEinkommen" typeRef="number"/>
+          <dmn:literalExpression id="_6ABDB051-BE0C-4D65-95C4-C61F2E53E583">
+            <dmn:text>if
+							Einkommen.EinkommenVorDerGeburt != null and Einkommen.EinkommenNachDerGeburt != null
+							then
+							Einkommen.EinkommenVorDerGeburt - Einkommen.EinkommenNachDerGeburt
+							else
+							0</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0DA33903-14A8-4533-B3A0-F190EE8444C9" name="Bonus" typeRef="number"/>
+          <dmn:decisionTable id="_8700E838-59C5-47CB-9FE4-063D1326BEF6" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_F0E115A2-1568-4BDF-9967-A83BE7397AF1">
+              <dmn:inputExpression id="_1F1F4F6F-24FC-4260-90B6-02C7889FF1EF" typeRef="boolean">
+                <dmn:text>Anspruch</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_04786979-DFC6-4B8D-905A-A061909B1E5F">
+              <dmn:inputExpression id="_58E1DAE3-55A2-4557-BAFD-BDE2C8CA197A" typeRef="Einkommen">
+                <dmn:text>Einkommen</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_98353821-2EE7-4AE9-95C5-6855A6991121"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_402F8B31-DC72-4AE7-B8B9-8F29E8DBFDE3">
+              <dmn:inputEntry id="_F059D5A8-E19D-476E-A1B5-3D2FA9B0D6F1">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_2F7F9BE6-3A1E-42D6-920D-75ED680449AF">
+                <dmn:text>not(null)</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_E35717BF-273D-4544-824A-6B3185419589">
+                <dmn:text>max(75, 0.1 * DifferenzEinkommen)</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_4E578EB3-3323-4CE0-ACA8-0B20D7C3C1A9">
+              <dmn:inputEntry id="_D1A3CCD0-204E-4469-89D0-DA070CFC1403">
+                <dmn:text>-
+								</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F6C40929-346B-4FA5-A1B3-AC3375168B81">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_73C8C2A8-BC2D-4163-A051-1E29830A98F2">
+                <dmn:text>0</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_6BE23856-0AC1-4846-8240-9D9B2A9A9FAA">
+            <dmn:text>Bonus</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:authorityRequirement id="_40CC9D7F-58FE-46C7-A279-06EC9B0A2CD9">
+      <dmn:requiredAuthority href="#_1024D432-BC24-47FB-8B02-D08FC2702AAE"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_22A65FC1-9774-47D1-89B5-A8FF889A491C" name="Logik Höhe des Anspruchs">
+    <dmn:extensionElements/>
+    <dmn:variable id="_6E895AA5-D922-41DB-A121-DB176507E3EC" name="Logik Höhe des Anspruchs" typeRef="number"/>
+    <dmn:encapsulatedLogic id="_6FC5F9D9-1E44-4E02-A933-6C5DD582E2EA" kind="FEEL">
+      <dmn:formalParameter id="_2107CC0B-8188-44A9-9468-4940B2B2D0D0" name="Einkommen" typeRef="Einkommen"/>
+      <dmn:context id="_07B5B689-600C-43BB-9A8D-D839ED4A84EB">
+        <dmn:contextEntry>
+          <dmn:variable id="_83440037-06D9-462A-872C-133BB2E21639" name="Faktor" typeRef="number"/>
+          <dmn:literalExpression id="_22CFEED7-8519-485D-BBA7-32B863A153E5">
+            <dmn:text>Logik Faktor(Einkommen)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_441A66B4-B264-425A-A763-6300007A93DC" name="Differenz" typeRef="number"/>
+          <dmn:literalExpression id="_66CC53A8-2B6D-4ED7-A57F-BE7957F3531B">
+            <dmn:text>if
+							Einkommen.EinkommenVorDerGeburt != null and Einkommen.EinkommenNachDerGeburt != null
+							then
+							Einkommen.EinkommenVorDerGeburt - Einkommen.EinkommenNachDerGeburt
+							else
+							0</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_51346725-D10F-46BC-8922-CAC9C10ED819" name="Höhe" typeRef="number"/>
+          <dmn:decisionTable id="_7934F19C-1689-496A-98CB-C73384457AC7" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_65E7AFF1-DA00-498B-AA94-319E819CB2B5">
+              <dmn:inputExpression id="_BCD86B75-A1B4-45CE-9FFA-A211678C86C8" typeRef="number">
+                <dmn:text>Differenz</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_0E30B426-2B2F-4DC0-AF90-9EB5D82DED5F"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_F9BFCCF5-A0A2-48A1-811F-EAF72F883279">
+              <dmn:inputEntry id="_8B0B244A-2FB8-4421-A34E-0660BD4E60F0">
+                <dmn:text>&gt;0</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_063A5790-049F-4FBF-8A40-54BC27485187">
+                <dmn:text>min(1800, max(300, Faktor * Differenz))</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_D3DBF313-6AE0-43FA-9CC4-8B99EB258EBC">
+              <dmn:inputEntry id="_CC566702-4BED-4B15-9BA3-BF48D41E0936">
+                <dmn:text>&lt;=0</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_057ADD09-D088-43C3-81D2-B2316F719A44">
+                <dmn:text>0</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_228E104F-05A9-4DC9-B0A0-E0B4BE44E520">
+            <dmn:text>Höhe</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_810922CF-C901-4A01-8238-BEB640B5E499">
+      <dmn:requiredKnowledge href="#_8F165D02-86CF-4B4B-BAF1-E2C0263033C4"/>
+    </dmn:knowledgeRequirement>
+    <dmn:authorityRequirement id="_3BF81977-9670-4954-8372-68990452137D">
+      <dmn:requiredAuthority href="#_8D0EB318-1718-4CA1-B5B5-226E5FB8DDD9"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_563C362B-6856-4FE3-AC1A-52E6CE67F833" name="LogikAnspruchAufElterngeld">
+    <dmn:extensionElements/>
+    <dmn:variable id="_901CCCCD-E73A-401B-9F9A-39F8E8670D9B" name="LogikAnspruchAufElterngeld" typeRef="boolean"/>
+    <dmn:encapsulatedLogic id="_93D427CF-6AB8-44DC-BEE0-13BA7C85354E" kind="FEEL">
+      <dmn:formalParameter id="_87B54F76-9C6D-40BF-9BCE-992270A213C3" name="Elter" typeRef="Elter"/>
+      <dmn:formalParameter id="_E6CA586A-C9DF-4E0B-9A6D-E39CF45A5C7F" name="Neugeborene" typeRef="Neugeborene"/>
+      <dmn:formalParameter id="_87CBB04D-6E2B-456F-884E-692917B5290C" name="Sondergrund" typeRef="boolean"/>
+      <dmn:formalParameter id="_FD48FF15-05A8-47C6-8596-C365B2E95ABB" name="alleinerziehend" typeRef="boolean"/>
+      <dmn:context id="_F2FABEEC-2208-49A9-BD87-8866279EE87D">
+        <dmn:contextEntry>
+          <dmn:variable id="_66CF919D-9FBB-45B3-8476-581767F9E93E" name="Monate" typeRef="number"/>
+          <dmn:literalExpression id="_3661E16C-2706-40DA-8EC7-6B85B68EDECB">
+            <dmn:text>Elter.Elternzeitvarianten.MonateBasiselterngeld + Elter.Elternzeitvarianten.MonateElterngeldPlus/2</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_2FB18343-12C3-46A1-BFFE-16C47414DD9D" name="Extramonate" typeRef="number"/>
+          <dmn:literalExpression id="_F98B28B5-99AF-40E8-B9A8-537690FF94BA">
+            <dmn:text>Logik Extramonate(Neugeborene)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0155F687-87EC-4314-A967-A72A57242D8C" name="Wochenstunden" typeRef="number"/>
+          <dmn:literalExpression id="_437446E9-DC06-4D15-9E77-B66C6F731CC8">
+            <dmn:text>Elter.Einkommen.Arbeitswochenstunden</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_A7D39DCA-3179-4605-A469-5C5030A61C64" name="Grad" typeRef="number"/>
+          <dmn:literalExpression id="_7A2AE0A5-8212-499C-86C9-EBD2D5878D5F">
+            <dmn:text>Elter.GradRechtlicherVerwandtschaft</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0F5C5CDA-DCD6-41C6-A8B2-4425178158D5" name="Wohnsitz" typeRef="boolean"/>
+          <dmn:literalExpression id="_725B9D4C-90CC-403D-9BE5-68A7D9D63D81">
+            <dmn:text>Elter.Anspruchsbedingungen.WohnsitzInnerhalbDeutschlands</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_5E3E421B-6F6B-4CDD-B8AF-D349CC90C50A" name="Haushalt" typeRef="boolean"/>
+          <dmn:literalExpression id="_F8E9957F-2004-49DB-9771-D7F277C4AFC8">
+            <dmn:text>Elter.Anspruchsbedingungen.KindImHaushalt</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_8EF4DB0A-EF13-40A8-8483-1E5CE248BD35" name="Erziehung" typeRef="boolean"/>
+          <dmn:literalExpression id="_2F3A30AF-F321-407D-9C2B-BAB32B74BECA">
+            <dmn:text>Elter.Anspruchsbedingungen.BetreuungUndErziehung</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_598F615B-8793-4020-8DF1-D88E8BD83543" name="Anspruch" typeRef="boolean"/>
+          <dmn:decisionTable id="_1C86E146-F2DC-452F-B6B6-BEAF9CBD81EF" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_AB0978D5-5EDD-47D5-A6A7-280717A7D829">
+              <dmn:inputExpression id="_C3C135C9-8E56-46BD-9535-EC250EEA55DC" typeRef="number">
+                <dmn:text>Neugeborene.Anzahl</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_96395F30-0AB1-4201-AFE0-852C8F844959">
+              <dmn:inputExpression id="_AF95DB8B-BA19-46A7-B603-29D4A188CDDE" typeRef="boolean">
+                <dmn:text>alleinerziehend</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_EA027340-963F-44FD-9B93-B80A1134E02F">
+              <dmn:inputExpression id="_14D97F78-AAB2-4E69-A70F-2EB3EB8563DF" typeRef="number">
+                <dmn:text>Monate</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_9D7F2D34-A4DD-40B9-8269-58CA4DA5A7C8">
+              <dmn:inputExpression id="_0257C27C-DBE7-434B-8130-30BD1F7C03CA" typeRef="number">
+                <dmn:text>Wochenstunden</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_CE1BA799-D98B-4B8A-B8C7-4BDB84270F91">
+              <dmn:inputExpression id="_1DE76670-A2E0-4390-9CA2-303E2F1C76BF" typeRef="number">
+                <dmn:text>Grad</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_0D544E53-F539-4E47-A188-2FA1CF06D825">
+              <dmn:inputExpression id="_9DDFAE3F-BB7C-4318-9520-7F780EC84D5E" typeRef="boolean">
+                <dmn:text>Wohnsitz</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_21F78E6D-18FA-4BE0-AE0E-D3ADE8FB7CDE">
+              <dmn:inputExpression id="_E0934518-7FA4-4EAD-9ADA-D2BF5C9811FF" typeRef="boolean">
+                <dmn:text>Haushalt</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_B7235650-696F-4B9E-9D7D-224BBDEC34A5">
+              <dmn:inputExpression id="_8374E245-8592-48AD-A731-6FBF20B3B542" typeRef="boolean">
+                <dmn:text>Erziehung</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_00E80F46-6978-4F51-8838-2E6DACF19847">
+              <dmn:inputExpression id="_EC8FFFD7-2169-402A-AC86-66A6B153DEC1" typeRef="boolean">
+                <dmn:text>Sondergrund</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_82FDB688-41D1-49F8-BD97-E7B55674BA91"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_D16C9BB7-1CF7-4331-AA31-F1860E5114E7">
+              <dmn:inputEntry id="_F6D10163-80F3-4C22-9C59-203D94A25814">
+                <dmn:text>&lt;1</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_5724E98E-8178-49AA-84AF-A14DBA50BEDB">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E16A3856-C4F0-44FF-92F8-11555B069F85">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_EDB74191-0306-4DCE-91E7-1D00E077BB04">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_88FD903A-D8AA-4772-94B9-5AF42BEEAE61">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_AFEEDC3F-AAC1-4CB1-A638-DCE344372D0E">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_98D14FC5-BD09-4A3D-8ED7-B874DA2FFB3F">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F6CA6DFD-4178-4D33-8A6C-784C39B311D0">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E52D2A1F-3B9B-4ACB-B762-E72EEB90A652">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_C28530FC-05DE-4BA0-86C8-4D03CE98AABA">
+                <dmn:text>false</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Nicht genug Neugeborene</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_CBBD3030-D714-41A4-9D47-77D1E36DD42D">
+              <dmn:inputEntry id="_1F65E2E3-25E1-46DC-A962-4625C910432C">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_1F840EA7-C9C7-46F6-A28A-6F387256C853">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_D7C8AF6C-A36B-492D-A44D-0FAC36B19BD7">
+                <dmn:text>not([2..(14+Extramonate)])</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_A47E33C8-C768-4531-B64D-B990E1B7B8D5">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_4CC1858E-22F3-4431-9813-F52076E52D78">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_9355D232-6BFE-45DF-9056-78034A86F320">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_44C1891F-B66A-4138-AC80-39BD9A69F8A7">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_0CAA6DA0-A543-49F8-B4A3-03EB1E5CA3E4">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F1D4A649-DBE6-426E-AFB4-B06F1FF9EA8A">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_1CB5DBA0-25CF-4E9C-A934-BEB919E39095">
+                <dmn:text>false</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Fehlerhafte Anzahl Monate</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_D6A0B925-0083-444A-B3F6-FD139227BF1B">
+              <dmn:inputEntry id="_5EDBBFD3-3719-408F-8A12-FB01635B8DD0">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_680C514C-108B-40EF-9E1F-8E68DE47792C">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_1563295D-6199-4863-A3DC-7506E4197E86">
+                <dmn:text>not([2..(12+Extramonate)])</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_CBBFA36B-AB23-4EF4-99D1-3478A79CE059">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_50B75576-6119-4AA0-95B3-D3ECBFC774FB">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_208E1915-87A9-46A5-80DF-DB4C31E1261E">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F00A5824-F78B-4D38-9F83-F3042AA2805A">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_3BF52839-FA96-4874-8564-313C03B828AE">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_5472A57D-1E7D-4DCD-8FF1-F548920C811A">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_DA34FE86-D480-4171-B1D8-2534BCE95481">
+                <dmn:text>false</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Fehlerhafte Anzahl Monate</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_A7C78385-FF1F-4668-8AB2-12E7ABA37037">
+              <dmn:inputEntry id="_40A4E2DB-9EB1-402B-BEAD-BCE98B74AA73">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F3B87997-012D-4F39-B12E-9FA17F5D4F0A">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_D7F91039-FC47-442B-80B0-D21D8E4C38E7">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E798BE9B-A814-46EB-A41C-9670FCA3DBDC">
+                <dmn:text>&gt;32</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_2CDA44B3-6397-4303-A1AE-E236D60C2F99">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_C204BD92-606D-4934-AE3A-FB7A478D50AB">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_FB08A058-8AF4-4EAA-93E5-0241124E52CB">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_BDDAA0DC-80AA-4C2F-86F8-77C943FB4E09">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_FF604C65-4CDB-41E8-A33B-44208AD4EDEA">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_9D869917-A920-4081-880E-622EA7677056">
+                <dmn:text>false</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Zu viele Arbeitswochenstunden</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_560EE3D5-91AD-4586-83A2-62F8738ECFDC">
+              <dmn:inputEntry id="_2385D703-D03A-487C-B9B8-1571D5ABEDCE">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_4C643518-DE14-49C7-BD56-BA870EDCA2C9">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E28FDEBC-C531-4F31-A816-6438C1B85118">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_4DBAFC30-C1B9-40DD-AE61-EAD088BF86ED">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_8037E883-87C4-4769-AA97-46574CACD4C1">
+                <dmn:text>not([1..3])</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_A6464089-AC57-4EE8-B809-310F9763414F">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_C1B31B0D-8CBC-4209-9062-5A8442906BF5">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_C21412EC-731C-4944-AA6A-B297E556044A">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_83759022-6EF3-4C1F-B717-8985E121D1C5">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_4F65A5CE-2206-4DBE-AA57-0C4A6FCC93C0">
+                <dmn:text>false</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Fehlerhafter Verwandtschaftsgrad</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_5E46458B-6DCE-498B-87D5-9E503FB68C51">
+              <dmn:inputEntry id="_D7725796-4694-488E-9382-1C231693AF3B">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_81DB63B5-4A34-4C40-8438-C541F0283EB5">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_A3C7F83F-271D-4DFA-A81A-6B0EA62FB755">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_19E66BC5-B52E-4A2B-8008-4F4F9D6AC8C6">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_334D1CA0-6FE5-4020-B661-D5CE73B776EB">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_1B234563-893B-40BE-82B5-F70C5719BF96">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_5B51C010-D7B8-485F-B048-711EBC4048EE">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_666076E7-7767-479C-8103-3D0D3688EDCD">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_1FED02E1-C2B8-410D-8F47-5C6E12CBC5D8">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_3FF377C4-413A-4728-9D45-B6A35229B8E1">
+                <dmn:text>true</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Anspruch besteht</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_B82344FE-E8A0-446E-AAF9-5CCF65A30FD2">
+              <dmn:inputEntry id="_3910F539-36E0-499C-B032-544B5424E692">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_67DFAAE9-A6AE-402C-9201-CDE2EFED21EC">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_E5E43187-A857-4101-9A1C-97246E629373">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_10E62E09-CB6A-4A23-8039-6444047D3958">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_3541F355-E51C-4531-AB9A-AEF67D3B215C">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_D8F8C3A6-1646-47E2-9A0B-06696A01C957">
+                <dmn:text>false</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_2ED99D4C-349D-4134-96EC-53863FD76E5F">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_59B0EDD2-FADD-4D04-99C3-D87180759687">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_B70CF2C6-D749-47C6-8D54-942CE024A82B">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_08927FD3-53FC-4EF7-8B61-F2775EB92739">
+                <dmn:text>true</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Sondergrund greift und Anspruch besteht</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_3DCA2708-A91E-4341-A034-8930D5003871">
+              <dmn:inputEntry id="_55A51F80-32F2-483F-AACA-2E161082C50C">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F427AA68-1862-4B04-9847-C54E98AD36BB">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_DBFA64C9-EBA9-4C72-A5C3-6A7DB9E27B12">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_4FE9F31A-A853-459D-A3B7-7D78F3E7C0AA">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_08CFCC02-1262-41DE-9198-3F025395C314">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_4A8F721C-71B3-4598-9FB0-51F9CFA1A803">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_1F821067-B655-4EFE-BCEC-E0F42472DA28">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_FEA2B5E3-C3A1-4737-9A5A-56230F7F2D6F">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F024A8AC-6188-4AC2-9F71-CFD2BB79E241">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_40D01202-0F34-473B-A2A7-4CBC3C3DC655">
+                <dmn:text>false</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Kein Anspruch</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_05644E02-60F4-492F-9C4C-121EDBE3E920">
+            <dmn:text>Anspruch</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_166F6334-FC11-4C30-97F3-05175E80A7F4">
+      <dmn:requiredKnowledge href="#_A7371081-CE45-4183-9D21-30C25F269E44"/>
+    </dmn:knowledgeRequirement>
+    <dmn:authorityRequirement id="_79BD48AF-E479-49A8-94EF-2E4C2CD02253">
+      <dmn:requiredAuthority href="#_F700AF5D-94AE-4F66-B77E-6CE5487778D5"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_7D0CBC7D-C453-47D4-877F-99850BEED6B0" name="LogikErgebnis">
+    <dmn:extensionElements/>
+    <dmn:variable id="_CC6B3B31-8946-449F-8833-8A5236377A8B" name="LogikErgebnis" typeRef="number"/>
+    <dmn:encapsulatedLogic id="_DEA7FB1F-7C46-483C-968C-D8F7BF976E9E" kind="FEEL">
+      <dmn:formalParameter id="_08503DB1-CE6E-437F-8D54-F4A80D0D0AC8" name="Anspruch" typeRef="boolean"/>
+      <dmn:formalParameter id="_5E62CD9D-54CA-4A44-8E30-FD311CBECEDE" name="Monate" typeRef="number"/>
+      <dmn:formalParameter id="_5167F519-A49A-4FFF-A558-F56C61E4D440" name="Höhe" typeRef="number"/>
+      <dmn:formalParameter id="_EBA423B9-BF7B-48C2-9C19-56329508297A" name="Elternzeitvarianten" typeRef="Elternzeitvariante"/>
+      <dmn:formalParameter id="_8E6A3302-3549-4449-8C04-0EC1275347BC" name="Neugeborene" typeRef="Neugeborene"/>
+      <dmn:formalParameter id="_94F13583-99BF-429B-8B31-605E91C6582C" name="Einkommen" typeRef="Einkommen"/>
+      <dmn:context id="_86C7FD1E-AA38-4F5A-987D-E7F2A4FFBB65">
+        <dmn:contextEntry>
+          <dmn:variable id="_DE9A2B0D-AD7F-4DB6-8725-2700376E9FE3" name="Extramonate" typeRef="number"/>
+          <dmn:literalExpression id="_D487BE70-CB66-4E71-B52D-238D5699BAEA">
+            <dmn:text>Logik Extramonate(Neugeborene)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_790D76F4-F3F4-46A8-9ABC-DD87B4DC914E" name="Faktor" typeRef="number"/>
+          <dmn:literalExpression id="_CE192A0B-D332-4EC9-97B3-4A874E96B570">
+            <dmn:text>Logik Faktor(Einkommen)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_AB6CB702-82CE-4346-86AB-89415DE62C16" name="Maximal" typeRef="number"/>
+          <dmn:literalExpression id="_6B21C940-C90F-4A81-8DE1-8C1595926445">
+            <dmn:text>(Elternzeitvarianten.MonateBasiselterngeld + Elternzeitvarianten.MonateElterngeldPlus/2) * max(300, min(Einkommen.EinkommenVorDerGeburt * Faktor, 1800))</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_BEFE7D04-D34C-42C8-9BDE-BB25F3C0ACE2" name="Ergebnis" typeRef="number"/>
+          <dmn:decisionTable id="_C8040637-1A1B-451A-ADE4-C0C079F91C68" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_CB346457-755F-45DE-8307-7A41308B4F52">
+              <dmn:inputExpression id="_AC5B8E82-281F-4FDA-97FC-7B6D03F55E66" typeRef="boolean">
+                <dmn:text>Anspruch</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_6A872809-E7D4-4A4D-8ED6-12E984F785DD">
+              <dmn:inputExpression id="_19792D57-E07F-4FE2-A8F9-8C93E74F6262" typeRef="number">
+                <dmn:text>Monate</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_021EA795-6CD5-4650-9ADB-AFAC168F3C83"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_33912EDA-0625-4544-B7C8-EEB74D3A03C7">
+              <dmn:inputEntry id="_F761F0EF-D2E5-4943-8CF9-F1A405D1FA07">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_A057863F-682F-43C4-99A9-DA6504853F57">
+                <dmn:text>[2..(14+Extramonate)]</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_A8768C20-3C14-4680-8C8A-92CE7710857B">
+                <dmn:text>Elternzeitvarianten.MonateBasiselterngeld * Höhe
+									+ min(Elternzeitvarianten.MonateElterngeldPlus * Höhe / 2, Maximal)</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_432B57B4-E519-4A7E-A628-78842B7A4FE4">
+              <dmn:inputEntry id="_ECA5DA20-E5E3-4CC4-8214-86646C6B662A">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_6C6FBF8E-B82C-469F-A938-2E23809182A2">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_E8B9B20E-145E-46D2-8C1D-F02D5692BF2F">
+                <dmn:text>0</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text/>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_0F80F08A-E4B7-440B-96BD-6F64FF475D94">
+            <dmn:text>Ergebnis</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_BAAFAE56-FCB8-4F70-8CD5-6E78BA45F0B2">
+      <dmn:requiredKnowledge href="#_A7371081-CE45-4183-9D21-30C25F269E44"/>
+    </dmn:knowledgeRequirement>
+    <dmn:knowledgeRequirement id="_F3E193C6-79C0-4514-A3A7-B68B8B36EF9D">
+      <dmn:requiredKnowledge href="#_8F165D02-86CF-4B4B-BAF1-E2C0263033C4"/>
+    </dmn:knowledgeRequirement>
+    <dmn:authorityRequirement id="_91D7D492-E4BA-49B8-9410-CEEED86A9BCE">
+      <dmn:requiredAuthority href="#_6EB02613-85C2-4D4C-81B0-B486ED9CA9B8"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:knowledgeSource id="_6EB02613-85C2-4D4C-81B0-B486ED9CA9B8" name="BEEG" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/BJNR274810006.html#BJNR274810006BJNG000101119" name="Gesetz zum Elterngeld und zur Elternzeit (Bundeselterngeld- und Elternzeitgesetz - BEEG)"/>
+    </dmn:extensionElements>
+    <dmn:type/>
+  </dmn:knowledgeSource>
+  <dmn:knowledgeSource id="_61312B67-66CD-4E22-B231-4C7336E60735" name="BEEG §4 Abs 4" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/__4.html" name="BEEG §4"/>
+    </dmn:extensionElements>
+    <dmn:type/>
+  </dmn:knowledgeSource>
+  <dmn:businessKnowledgeModel id="_A7371081-CE45-4183-9D21-30C25F269E44" name="Logik Extramonate">
+    <dmn:extensionElements/>
+    <dmn:variable id="_A58BD8C9-1621-4301-945A-7FBF5DEACF76" name="Logik Extramonate" typeRef="boolean"/>
+    <dmn:encapsulatedLogic id="_752DBE81-8BD3-440B-B6EE-53F3396D9AA3" kind="FEEL">
+      <dmn:formalParameter id="_81224B0D-1317-43CE-8266-AA36EBD1C596" name="Neugeborene" typeRef="Neugeborene"/>
+      <dmn:context id="_D1F5FAB0-5235-44A6-AD96-159CDC3E882A">
+        <dmn:contextEntry>
+          <dmn:variable id="_FDB10728-4B9D-437E-854A-D29F6BEA8085" name="zuFrüh" typeRef="number"/>
+          <dmn:literalExpression id="_2B70C141-3C17-43E6-AFD5-D0DD5DDC7C32">
+            <dmn:text>Neugeborene.WochenZuFrühGeboren</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_63AA46F6-D89B-4969-BA63-14A49F43551B" name="Extramonate" typeRef="number"/>
+          <dmn:decisionTable id="_F104DE01-0AD1-48DD-97FF-DCC4767417C4" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_5FE83BAC-9FE3-4F56-A0E0-0F0ACD8DCA6A">
+              <dmn:inputExpression id="_B465F5AC-0EC1-4589-9F5E-92ADAA301AC9" typeRef="number">
+                <dmn:text>zuFrüh</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_3BF64042-81B8-4E75-9F19-9F6D5E89CC38"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_9B38B84F-9882-4CF2-9FCB-DC9895448D5C">
+              <dmn:inputEntry id="_B14F94A6-525B-418F-8E32-8DB6506E1718">
+                <dmn:text>&gt;15</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_B03BA004-71C5-4635-A6E4-3646AE1B94DA">
+                <dmn:text>4</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>vier Monate oder mehr zu früh geboren</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_372EE6F7-54E6-4E55-B714-096B5EBC0A1D">
+              <dmn:inputEntry id="_2F6638AF-9038-4A4B-B9F5-337266E795F2">
+                <dmn:text>&gt;11</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_91BA0AC7-E490-4E76-B16B-834D39DA18E7">
+                <dmn:text>3</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>drei Monate zu früh geboren</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_EDE2B68A-B00C-4964-AF5E-4193F6D63300">
+              <dmn:inputEntry id="_D14193EA-EE51-4E13-A92F-B5FD41730ED7">
+                <dmn:text>&gt;7</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_60B44A2A-66F4-49CB-A9D1-15B318AA54A5">
+                <dmn:text>2</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>zwei Monate zu früh geboren</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_CCA70113-85A7-407F-956A-CBF2DFCEC906">
+              <dmn:inputEntry id="_39BDF959-44A9-43F2-B1AD-05D63F26BA9C">
+                <dmn:text>&gt;5</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_74445A19-067B-4A69-B090-4C7DCCB226E7">
+                <dmn:text>1</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>eineinhalb Monate zu früh geboren</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_69CAAD8B-3362-4222-A48A-286D5B1E48F3">
+              <dmn:inputEntry id="_528CC2C4-362E-4EAE-ACF9-AE018257F8D9">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_B2125833-B1D2-484D-A5D0-19EB0D1FD9A6">
+                <dmn:text>0</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>keine Frühgeburt</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_61C48FA5-C468-4514-9898-6C9A224824DD">
+            <dmn:text>Extramonate</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:authorityRequirement id="_B115B796-F79D-409A-9CC4-17ED1DA06C75">
+      <dmn:requiredAuthority href="#_AB08B353-83C8-4883-9BC8-BC75F647458D"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:knowledgeSource id="_AB08B353-83C8-4883-9BC8-BC75F647458D" name="BEEG §4 Abs 5" locationURI="">
+    <dmn:extensionElements>
+      <kie:attachment url="https://www.gesetze-im-internet.de/beeg/__4.html" name="BEEG §4"/>
+    </dmn:extensionElements>
+    <dmn:type/>
+  </dmn:knowledgeSource>
+  <dmn:inputData id="_3D64BF77-53EE-4796-A57C-FED73D52E370" name="Partnerschaftsbonus">
+    <dmn:extensionElements/>
+    <dmn:variable id="_E29ADBF5-38FB-464E-AA2E-DAA183D4B5F9" name="Partnerschaftsbonus" typeRef="Partnerschaftsbonus"/>
+  </dmn:inputData>
+  <dmn:businessKnowledgeModel id="_8F165D02-86CF-4B4B-BAF1-E2C0263033C4" name="Logik Faktor">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3A949A88-0ED4-470A-B8D3-17C1B0A5E5DF" name="Logik Faktor" typeRef="number"/>
+    <dmn:encapsulatedLogic id="_78FA1DE8-DBB1-486F-87E5-167869E76500" kind="FEEL">
+      <dmn:formalParameter id="_E70F8886-BC5A-4669-81A3-7EE7B289804A" name="Einkommen" typeRef="Einkommen"/>
+      <dmn:context id="_0DBBA924-62CD-4DFF-9F88-5ACF1DFD577C">
+        <dmn:contextEntry>
+          <dmn:variable id="_BF70FFB9-4CD9-4039-82CE-7924BABE6742" name="Vorher" typeRef="number"/>
+          <dmn:literalExpression id="_790D7E3F-DF12-4D98-A07B-D90E5F4872A9">
+            <dmn:text>Einkommen.EinkommenVorDerGeburt</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_CFB84F23-61D9-4F01-9374-5781110401C2" name="Faktor" typeRef="number"/>
+          <dmn:literalExpression id="_C0AF8DA2-F243-4C6A-9B54-5224F519959D">
+            <dmn:text>if
+							Vorher != null
+							then
+							min(1, 0.67 + floor((1000 - min(1000, Vorher))/2) * 0.001 - min(0.02, floor((max(1200, Vorher) - 1200)/2) * 0.001))
+							else
+							0.65</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_AD0D46D3-9BBF-4636-AD72-A60BC54E69B0">
+            <dmn:text>Faktor</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:authorityRequirement id="_98F3FAB1-7B30-4B4A-82B8-8E2F376A98CF">
+      <dmn:requiredAuthority href="#_8D0EB318-1718-4CA1-B5B5-226E5FB8DDD9"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_65CF1CBE-29FD-4062-A44A-D9AD7C960059" name="Logik Partnerschaftsbonus">
+    <dmn:extensionElements/>
+    <dmn:variable id="_FE50E189-4619-4D96-A366-D8AAA35FEEF3" name="Logik Partnerschaftsbonus" typeRef="number"/>
+    <dmn:encapsulatedLogic id="_F5AA38E8-520A-4338-ADF6-341F13411B1C" kind="FEEL">
+      <dmn:formalParameter id="_9DA257D3-80AC-49FE-A454-2668D7234AA5" name="Monate" typeRef="number"/>
+      <dmn:formalParameter id="_8CD36E8F-76E4-4338-BC3C-95D088642CBC" name="Elter" typeRef="Elter"/>
+      <dmn:formalParameter id="_D077A5A3-ACDD-467E-8492-A462636F48B2" name="alleinerziehend" typeRef="boolean"/>
+      <dmn:formalParameter id="_12639226-5A37-47A7-A003-2623096AC14A" name="AnspruchAufElterngeld" typeRef="boolean"/>
+      <dmn:context id="_0B72F493-5680-4533-A5B6-1338CE2DEDC7">
+        <dmn:contextEntry>
+          <dmn:variable id="_4579D0F7-909E-4A19-A162-A93CF1AB663D" name="Anspruch" typeRef="boolean"/>
+          <dmn:literalExpression id="_B70152B6-7FD6-4F3A-817A-8C2C8DC36EA8">
+            <dmn:text>if alleinerziehend
+							then
+							AnspruchAufElterngeld
+							else
+							AnspruchAufElterngeld[1] or AnspruchAufElterngeld[2]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_413460F7-43C8-4869-AB63-E789C5214E34" name="Arbeitswochenstunden" typeRef="number"/>
+          <dmn:literalExpression id="_C0FA3649-2DBF-4AD4-A51E-D3DD28751A0B">
+            <dmn:text>Elter.Einkommen.ArbeitswochenstundenPartnerschaftsbonus</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_088B79D6-6E4B-460C-9256-2A419B2236C1" name="Einkommen" typeRef="number"/>
+          <dmn:literalExpression id="_C3703C4A-B57D-44BD-8CF6-B77406EABD88">
+            <dmn:text>Elter.Einkommen.EinkommenPartnerschaftsbonus</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_FA9C58D4-AD3B-4593-ACE7-35C2BF2E28BA" name="Höhe" typeRef="number"/>
+          <dmn:decisionTable id="_43884FBB-C651-441C-89C9-049AA96A9101" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+            <dmn:input id="_1B800852-F64F-40A8-B792-CBD4FD5D3F51">
+              <dmn:inputExpression id="_B72A2E80-5D6C-4103-8E18-70CFC4D5ACC1" typeRef="boolean">
+                <dmn:text>Anspruch</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_791050E2-CCC2-4CB3-895F-40F66471BC70">
+              <dmn:inputExpression id="_0B89400A-7C4A-4DA3-8502-EC3A416F4CF0" typeRef="number">
+                <dmn:text>Arbeitswochenstunden</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:input id="_42A1C329-596B-46FA-BF73-41B5C6BC5CB2">
+              <dmn:inputExpression id="_C48E6666-0ED1-4648-9D27-09BC537FFCE6" typeRef="number">
+                <dmn:text>Monate</dmn:text>
+              </dmn:inputExpression>
+            </dmn:input>
+            <dmn:output id="_C7FB088C-B9E8-4398-A3D3-562E9DBB8C04"/>
+            <dmn:annotation name="annotation"/>
+            <dmn:rule id="_00AA976D-EEE8-478D-845D-B27EE84F9BD1">
+              <dmn:inputEntry id="_AB09A144-6029-4522-9035-8F8A91ACE99A">
+                <dmn:text>true</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_34D8BC0D-E6E2-4C24-AB40-91B554B439D0">
+                <dmn:text>[24..32]</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_F66C6320-27A7-4420-B9BC-16D21EE94A07">
+                <dmn:text>[2..4]</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_3A9E5F0A-8168-4228-8DA7-C30962911B39">
+                <dmn:text>Monate * Einkommen</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Grenzen eingehalten</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+            <dmn:rule id="_0A77DA24-BD20-4BA9-8CBE-6C34D4C4EAEF">
+              <dmn:inputEntry id="_D086CA7C-7E2C-405C-9F51-738CCD51E289">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_67690AC6-F96A-4630-AA56-662B3560A586">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:inputEntry id="_CC8D54A8-686A-4691-A3CA-6EF9277C6127">
+                <dmn:text>-</dmn:text>
+              </dmn:inputEntry>
+              <dmn:outputEntry id="_78A93D66-3019-4E72-94BC-D8CC4BA64369">
+                <dmn:text>0</dmn:text>
+              </dmn:outputEntry>
+              <dmn:annotationEntry>
+                <dmn:text>Grenzen nicht eingehalten</dmn:text>
+              </dmn:annotationEntry>
+            </dmn:rule>
+          </dmn:decisionTable>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_0715965A-06C3-4D29-8169-BEF57CC0FD2A">
+            <dmn:text>Höhe</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:authorityRequirement id="_46116A42-A662-43A3-83E7-D0281B6170C1">
+      <dmn:requiredAuthority href="#_61312B67-66CD-4E22-B231-4C7336E60735"/>
+    </dmn:authorityRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_18B06C56-C99F-419D-9504-7B9E3CBB546A" name="Partnerschaftsbonushöhe">
+    <dmn:extensionElements/>
+    <dmn:variable id="_37488DCE-4A5A-4074-B6AA-8D75FD435862" name="Partnerschaftsbonushöhe" typeRef="number"/>
+    <dmn:informationRequirement id="_B0E4DC18-C8E7-404A-A277-E8DE4351C6F1">
+      <dmn:requiredDecision href="#_B4093A7C-7ACD-44A1-AEC2-25353FD4A298"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_138D8613-6F6F-4031-BBD6-F231D5FB4B4F">
+      <dmn:requiredInput href="#_3D64BF77-53EE-4796-A57C-FED73D52E370"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_AB61CA95-74D9-4795-8F50-F5E56C453ED5">
+      <dmn:requiredInput href="#_2149641E-8A70-4AE7-A07A-F4BEE11E9311"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_677B3704-64D2-43B0-ACB1-B94659528C93">
+      <dmn:requiredKnowledge href="#_65CF1CBE-29FD-4062-A44A-D9AD7C960059"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_CCAEACB4-9709-4B30-A881-420F15DDE78F">
+      <dmn:contextEntry>
+        <dmn:variable id="_BDD1F74E-BB2B-405F-B223-664C93974BDE" name="Höhe" typeRef="number"/>
+        <dmn:literalExpression id="_32AB4432-5C99-4896-8865-756B9923DBFB">
+          <dmn:text>for i in 1..min(2, count(Eltern)) return
+						Logik Partnerschaftsbonus(Partnerschaftsbonus.Monate, Eltern[i], count(Eltern) = 1, AnspruchAufElterngeld)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_494375EE-3A5B-4291-AE93-C83BE7875471">
+          <dmn:text>if
+						count(Eltern) = 1 and Höhe &gt; 0 or
+						(count(Eltern) = 2 and Höhe[1] &gt; 0 and Höhe[2] &gt; 0)
+						then
+						sum(Höhe)
+						else
+						0</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_E777E424-8CD9-4440-94D1-26351E048264" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_B825CDA5-5069-4433-86E9-1CB0AAF79AE4">
+            <kie:width>838</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E06A145D-EBDD-471A-A224-384BEF5AE33B">
+            <kie:width>1349</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3445DAB7-AA06-44E1-B36D-32F04B488DFB">
+            <kie:width>50</kie:width>
+            <kie:width>147</kie:width>
+            <kie:width>765</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_059503D7-F1CD-45F0-8C67-0C834E8EDA33">
+            <kie:width>765</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F519DD14-7A2F-45E2-AA69-60FFDA2E1291">
+            <kie:width>765</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_230B4DD8-7182-4555-A4BE-EF6C833A86DC">
+            <kie:width>896</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_298AA270-51B8-4875-AA5C-ECFAC7FF031D">
+            <kie:width>50</kie:width>
+            <kie:width>212</kie:width>
+            <kie:width>1138</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D0C20F84-4E83-4A63-855C-6E050F30FD6C">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>968</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_38E162E3-BC32-475F-ACC6-E8D624712FC5">
+            <kie:width>968</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_493CD081-0D31-417B-86C3-08E42C1EBAE0">
+            <kie:width>968</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E7CFFE98-2EDE-4528-A690-3DAA4A68F3FD">
+            <kie:width>1138</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C6FFDEE3-FD0B-4E13-9E22-42EDCC0019D4">
+            <kie:width>1138</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A5CFAFCE-4B5B-474A-9C6A-BF3F17D222FF"/>
+          <kie:ComponentWidths dmnElementRef="_229252B7-5A66-4544-B09E-67AACBC4EFA1"/>
+          <kie:ComponentWidths dmnElementRef="_9461AB55-4B47-484A-BAD9-E82474DCA89F"/>
+          <kie:ComponentWidths dmnElementRef="_764817AE-16AC-4D9C-BB9D-8DE68FD7B2AC"/>
+          <kie:ComponentWidths dmnElementRef="_31DD216D-3E16-4B05-8253-EE28927C8FBC"/>
+          <kie:ComponentWidths dmnElementRef="_EB9B482A-9A84-4062-930D-F2BC767F5BC7"/>
+          <kie:ComponentWidths dmnElementRef="_A51C80E6-4C73-43CB-AF1A-A810C35B36D6"/>
+          <kie:ComponentWidths dmnElementRef="_E4F45BD4-296F-4102-86D4-A08774909588"/>
+          <kie:ComponentWidths dmnElementRef="_BE899C8F-10EB-43FC-B754-C50FE2A39781"/>
+          <kie:ComponentWidths dmnElementRef="_D99F2FBC-3E85-499F-A73E-A1F5EB29A922"/>
+          <kie:ComponentWidths dmnElementRef="_EC0FB96B-79A2-4149-AC80-EA0965076C39">
+            <kie:width>50</kie:width>
+            <kie:width>153</kie:width>
+            <kie:width>772</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6ABDB051-BE0C-4D65-95C4-C61F2E53E583">
+            <kie:width>772</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8700E838-59C5-47CB-9FE4-063D1326BEF6">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>147</kie:width>
+            <kie:width>279</kie:width>
+            <kie:width>176</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6BE23856-0AC1-4846-8240-9D9B2A9A9FAA">
+            <kie:width>772</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4A804BFF-3A5D-4F96-969C-78DE00B9E5CF">
+            <kie:width>50</kie:width>
+            <kie:width>995</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_07B5B689-600C-43BB-9A8D-D839ED4A84EB">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_22CFEED7-8519-485D-BBA7-32B863A153E5">
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_66CC53A8-2B6D-4ED7-A57F-BE7957F3531B">
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7934F19C-1689-496A-98CB-C73384457AC7">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>391</kie:width>
+            <kie:width>390</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_228E104F-05A9-4DC9-B0A0-E0B4BE44E520">
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6FC5F9D9-1E44-4E02-A933-6C5DD582E2EA">
+            <kie:width>50</kie:width>
+            <kie:width>1121</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F2FABEEC-2208-49A9-BD87-8866279EE87D">
+            <kie:width>50</kie:width>
+            <kie:width>113</kie:width>
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3661E16C-2706-40DA-8EC7-6B85B68EDECB">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F98B28B5-99AF-40E8-B9A8-537690FF94BA">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_437446E9-DC06-4D15-9E77-B66C6F731CC8">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7A2AE0A5-8212-499C-86C9-EBD2D5878D5F">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_725B9D4C-90CC-403D-9BE5-68A7D9D63D81">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F8E9957F-2004-49DB-9771-D7F277C4AFC8">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2F3A30AF-F321-407D-9C2B-BAB32B74BECA">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1C86E146-F2DC-452F-B6B6-BEAF9CBD81EF">
+            <kie:width>50</kie:width>
+            <kie:width>151</kie:width>
+            <kie:width>107</kie:width>
+            <kie:width>217</kie:width>
+            <kie:width>116</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_05644E02-60F4-492F-9C4C-121EDBE3E920">
+            <kie:width>1361</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_93D427CF-6AB8-44DC-BEE0-13BA7C85354E">
+            <kie:width>50</kie:width>
+            <kie:width>1544</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_86C7FD1E-AA38-4F5A-987D-E7F2A4FFBB65">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>1428</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D487BE70-CB66-4E71-B52D-238D5699BAEA">
+            <kie:width>1428</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CE192A0B-D332-4EC9-97B3-4A874E96B570">
+            <kie:width>1428</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6B21C940-C90F-4A81-8DE1-8C1595926445">
+            <kie:width>1428</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C8040637-1A1B-451A-ADE4-C0C079F91C68">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>179</kie:width>
+            <kie:width>707</kie:width>
+            <kie:width>372</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0F80F08A-E4B7-440B-96BD-6F64FF475D94">
+            <kie:width>1428</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DEA7FB1F-7C46-483C-968C-D8F7BF976E9E">
+            <kie:width>50</kie:width>
+            <kie:width>1598</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D1F5FAB0-5235-44A6-AD96-159CDC3E882A">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>588</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2B70C141-3C17-43E6-AFD5-D0DD5DDC7C32">
+            <kie:width>588</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F104DE01-0AD1-48DD-97FF-DCC4767417C4">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>318</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_61C48FA5-C468-4514-9898-6C9A224824DD">
+            <kie:width>588</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_752DBE81-8BD3-440B-B6EE-53F3396D9AA3">
+            <kie:width>50</kie:width>
+            <kie:width>758</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0DBBA924-62CD-4DFF-9F88-5ACF1DFD577C">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_790D7E3F-DF12-4D98-A07B-D90E5F4872A9">
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C0AF8DA2-F243-4C6A-9B54-5224F519959D">
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_AD0D46D3-9BBF-4636-AD72-A60BC54E69B0">
+            <kie:width>951</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_78FA1DE8-DBB1-486F-87E5-167869E76500">
+            <kie:width>50</kie:width>
+            <kie:width>1121</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0B72F493-5680-4533-A5B6-1338CE2DEDC7">
+            <kie:width>50</kie:width>
+            <kie:width>162</kie:width>
+            <kie:width>870</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B70152B6-7FD6-4F3A-817A-8C2C8DC36EA8">
+            <kie:width>870</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C0FA3649-2DBF-4AD4-A51E-D3DD28751A0B">
+            <kie:width>870</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C3703C4A-B57D-44BD-8CF6-B77406EABD88">
+            <kie:width>870</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_43884FBB-C651-441C-89C9-049AA96A9101">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>169</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>208</kie:width>
+            <kie:width>223</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0715965A-06C3-4D29-8169-BEF57CC0FD2A">
+            <kie:width>870</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F5AA38E8-520A-4338-ADF6-341F13411B1C">
+            <kie:width>50</kie:width>
+            <kie:width>1102</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CCAEACB4-9709-4B30-A881-420F15DDE78F">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>897</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_32AB4432-5C99-4896-8865-756B9923DBFB">
+            <kie:width>897</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_494375EE-3A5B-4291-AE93-C83BE7875471">
+            <kie:width>897</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_F700AF5D-94AE-4F66-B77E-6CE5487778D5" dmnElementRef="_F700AF5D-94AE-4F66-B77E-6CE5487778D5" isCollapsed="false">
+        <dc:Bounds x="136.57009345794393" y="191.6842105263158" width="102" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_8D0EB318-1718-4CA1-B5B5-226E5FB8DDD9" dmnElementRef="_8D0EB318-1718-4CA1-B5B5-226E5FB8DDD9" isCollapsed="false">
+        <dc:Bounds x="1054" y="173.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_92D42D68-7E95-4467-AB2F-5E143859E326" dmnElementRef="_92D42D68-7E95-4467-AB2F-5E143859E326" isCollapsed="false">
+        <dc:Bounds x="83.5981308411215" y="322.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F32A3373-74B9-4666-981B-7CD0D64838DC" dmnElementRef="_F32A3373-74B9-4666-981B-7CD0D64838DC" isCollapsed="false">
+        <dc:Bounds x="524.5981308411215" y="261.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_9CC1DDF9-6F88-4B7B-B9DF-1392AA6F105C" dmnElementRef="_9CC1DDF9-6F88-4B7B-B9DF-1392AA6F105C" isCollapsed="false">
+        <dc:Bounds x="880.2990654205607" y="527" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_2149641E-8A70-4AE7-A07A-F4BEE11E9311" dmnElementRef="_2149641E-8A70-4AE7-A07A-F4BEE11E9311" isCollapsed="false">
+        <dc:Bounds x="634.2990654205607" y="519" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1498108C-9C36-4BA5-B659-45B762AA4C05" dmnElementRef="_1498108C-9C36-4BA5-B659-45B762AA4C05" isCollapsed="false">
+        <dc:Bounds x="658" y="191" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_F57FF75A-F7EF-43EB-9AE5-F66DC1422B86" dmnElementRef="_F57FF75A-F7EF-43EB-9AE5-F66DC1422B86" isCollapsed="false">
+        <dc:Bounds x="870" y="408" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_65CE9A3E-E87C-453F-A6CD-21AA933E6F35" dmnElementRef="_65CE9A3E-E87C-453F-A6CD-21AA933E6F35" isCollapsed="false">
+        <dc:Bounds x="733" y="330" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1024D432-BC24-47FB-8B02-D08FC2702AAE" dmnElementRef="_1024D432-BC24-47FB-8B02-D08FC2702AAE" isCollapsed="false">
+        <dc:Bounds x="1029" y="316" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_B4093A7C-7ACD-44A1-AEC2-25353FD4A298" dmnElementRef="_B4093A7C-7ACD-44A1-AEC2-25353FD4A298" isCollapsed="false">
+        <dc:Bounds x="431" y="191" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_92B682EF-62D8-4B5C-A599-E1ED984B5985" dmnElementRef="_92B682EF-62D8-4B5C-A599-E1ED984B5985" isCollapsed="false">
+        <dc:Bounds x="539" y="26" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_E6E816B0-28DD-4798-932F-A0E1FB51C1E2" dmnElementRef="_E6E816B0-28DD-4798-932F-A0E1FB51C1E2" isCollapsed="false">
+        <dc:Bounds x="334" y="322" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_7023505C-940A-411D-AD22-30C52E7DFB46" dmnElementRef="_7023505C-940A-411D-AD22-30C52E7DFB46" isCollapsed="false">
+        <dc:Bounds x="208.59813084112147" y="321.68421052631584" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_DEC1F43E-1D76-4A48-88DF-1628B7C037C1" dmnElementRef="_DEC1F43E-1D76-4A48-88DF-1628B7C037C1" isCollapsed="false">
+        <dc:Bounds x="870" y="316" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_22A65FC1-9774-47D1-89B5-A8FF889A491C" dmnElementRef="_22A65FC1-9774-47D1-89B5-A8FF889A491C" isCollapsed="false">
+        <dc:Bounds x="825.2990654205607" y="198" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_563C362B-6856-4FE3-AC1A-52E6CE67F833" dmnElementRef="_563C362B-6856-4FE3-AC1A-52E6CE67F833" isCollapsed="false">
+        <dc:Bounds x="281.5981308411215" y="190.68421052631578" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_7D0CBC7D-C453-47D4-877F-99850BEED6B0" dmnElementRef="_7D0CBC7D-C453-47D4-877F-99850BEED6B0" isCollapsed="false">
+        <dc:Bounds x="342.29906542056074" y="32.684210526315795" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_6EB02613-85C2-4D4C-81B0-B486ED9CA9B8" dmnElementRef="_6EB02613-85C2-4D4C-81B0-B486ED9CA9B8" isCollapsed="false">
+        <dc:Bounds x="127.5981308411215" y="32.684210526315795" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_61312B67-66CD-4E22-B231-4C7336E60735" dmnElementRef="_61312B67-66CD-4E22-B231-4C7336E60735" isCollapsed="false">
+        <dc:Bounds x="1054" y="16.684210526315795" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_A7371081-CE45-4183-9D21-30C25F269E44" dmnElementRef="_A7371081-CE45-4183-9D21-30C25F269E44" isCollapsed="false">
+        <dc:Bounds x="306.5981308411215" y="111.34210526315789" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_AB08B353-83C8-4883-9BC8-BC75F647458D" dmnElementRef="_AB08B353-83C8-4883-9BC8-BC75F647458D" isCollapsed="false">
+        <dc:Bounds x="138.5981308411215" y="115.34210526315789" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_3D64BF77-53EE-4796-A57C-FED73D52E370" dmnElementRef="_3D64BF77-53EE-4796-A57C-FED73D52E370" isCollapsed="false">
+        <dc:Bounds x="777" y="134.6842105263158" width="97" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_8F165D02-86CF-4B4B-BAF1-E2C0263033C4" dmnElementRef="_8F165D02-86CF-4B4B-BAF1-E2C0263033C4" isCollapsed="false">
+        <dc:Bounds x="926" y="114.34210526315789" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_65CF1CBE-29FD-4062-A44A-D9AD7C960059" dmnElementRef="_65CF1CBE-29FD-4062-A44A-D9AD7C960059" isCollapsed="false">
+        <dc:Bounds x="883" y="32.684210526315795" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_18B06C56-C99F-419D-9504-7B9E3CBB546A" dmnElementRef="_18B06C56-C99F-419D-9504-7B9E3CBB546A" isCollapsed="false">
+        <dc:Bounds x="726" y="38" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_AE1657BF-70A6-418A-9490-B37E6E66AB9E" dmnElementRef="_AE1657BF-70A6-418A-9490-B37E6E66AB9E">
+        <di:waypoint x="783" y="330"/>
+        <di:waypoint x="708" y="241"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F0D827BD-550F-40A1-AD92-EA00FA79A3F4" dmnElementRef="_F0D827BD-550F-40A1-AD92-EA00FA79A3F4">
+        <di:waypoint x="684.2990654205607" y="519"/>
+        <di:waypoint x="708" y="241"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F8196606-88FE-4BBD-B545-F4DAF72C6DE6" dmnElementRef="_F8196606-88FE-4BBD-B545-F4DAF72C6DE6">
+        <di:waypoint x="875.2990654205607" y="223"/>
+        <di:waypoint x="758" y="216"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_9330B334-11BC-4062-82BE-328EEC32BBDA" dmnElementRef="_9330B334-11BC-4062-82BE-328EEC32BBDA">
+        <di:waypoint x="930.2990654205607" y="552"/>
+        <di:waypoint x="920" y="458"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_A4D45E27-4C23-4782-AE76-D52A41901C91" dmnElementRef="_A4D45E27-4C23-4782-AE76-D52A41901C91">
+        <di:waypoint x="1029" y="341"/>
+        <di:waypoint x="970" y="433"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_BF02AB10-D312-4A6B-8EC1-674BB2FC3CAF" dmnElementRef="_BF02AB10-D312-4A6B-8EC1-674BB2FC3CAF">
+        <di:waypoint x="684.2990654205607" y="519"/>
+        <di:waypoint x="783" y="380"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_CE433DE5-8924-4B73-A320-9F7FBCC9E189" dmnElementRef="_CE433DE5-8924-4B73-A320-9F7FBCC9E189">
+        <di:waypoint x="920" y="408"/>
+        <di:waypoint x="783" y="380"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_A4954BEE-6DD5-4030-AFB6-6E3672BA5897" dmnElementRef="_A4954BEE-6DD5-4030-AFB6-6E3672BA5897">
+        <di:waypoint x="920" y="341"/>
+        <di:waypoint x="833" y="355"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_E899F43A-FF5F-4CB6-ABFC-D0659569F74C" dmnElementRef="_E899F43A-FF5F-4CB6-ABFC-D0659569F74C">
+        <di:waypoint x="384" y="322"/>
+        <di:waypoint x="481" y="241"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C8A0F368-AB94-4722-960B-76B9BEA6A0DD" dmnElementRef="_C8A0F368-AB94-4722-960B-76B9BEA6A0DD">
+        <di:waypoint x="684.2990654205607" y="519"/>
+        <di:waypoint x="481" y="241"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_AD5423E1-1206-4978-88CC-1AB1862EBD76" dmnElementRef="_AD5423E1-1206-4978-88CC-1AB1862EBD76">
+        <di:waypoint x="574.5981308411215" y="261.3421052631579"/>
+        <di:waypoint x="481" y="241"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_B7E715D1-F3CF-4A01-87FE-FBA2A6F7447C" dmnElementRef="_B7E715D1-F3CF-4A01-87FE-FBA2A6F7447C">
+        <di:waypoint x="331.5981308411215" y="215.68421052631578"/>
+        <di:waypoint x="431" y="216"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_6B59B893-A8B3-4117-B3CA-3A0D6684D5A8" dmnElementRef="_6B59B893-A8B3-4117-B3CA-3A0D6684D5A8">
+        <di:waypoint x="481" y="191"/>
+        <di:waypoint x="589" y="76"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_AB25A046-000B-4AD0-99C7-55BA2CB5145C" dmnElementRef="_AB25A046-000B-4AD0-99C7-55BA2CB5145C">
+        <di:waypoint x="574.5981308411215" y="261.3421052631579"/>
+        <di:waypoint x="589" y="76"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_38848D1E-CE49-49EC-8ED2-3B2C89DCD619" dmnElementRef="_38848D1E-CE49-49EC-8ED2-3B2C89DCD619">
+        <di:waypoint x="684.2990654205607" y="544"/>
+        <di:waypoint x="589" y="76"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_4A1763C6-AA6F-4401-BB51-9739B40512F3" dmnElementRef="_4A1763C6-AA6F-4401-BB51-9739B40512F3">
+        <di:waypoint x="708" y="191"/>
+        <di:waypoint x="589" y="76"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3FC0D3F6-1329-421E-941C-E5C76AC350D8-AUTO-TARGET" dmnElementRef="_3FC0D3F6-1329-421E-941C-E5C76AC350D8">
+        <di:waypoint x="726" y="63"/>
+        <di:waypoint x="589" y="76"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_21C0696C-CF26-4BA0-8514-CFA870E4401F" dmnElementRef="_21C0696C-CF26-4BA0-8514-CFA870E4401F">
+        <di:waypoint x="825.5" y="159.6842105263158"/>
+        <di:waypoint x="589" y="76"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_483DD365-065F-4BEA-86E3-B2545409A2B2" dmnElementRef="_483DD365-065F-4BEA-86E3-B2545409A2B2">
+        <di:waypoint x="392.29906542056074" y="57.684210526315795"/>
+        <di:waypoint x="539" y="51"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_5997F46C-5F7D-4AFD-A232-A1F1B3480CB5" dmnElementRef="_5997F46C-5F7D-4AFD-A232-A1F1B3480CB5">
+        <di:waypoint x="684.2990654205607" y="519"/>
+        <di:waypoint x="384" y="372"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_AA9EFAB8-E50C-4837-8A99-494DE92F6C19" dmnElementRef="_AA9EFAB8-E50C-4837-8A99-494DE92F6C19">
+        <di:waypoint x="258.5981308411215" y="346.68421052631584"/>
+        <di:waypoint x="334" y="347"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_7F9F3286-5634-4EB7-AA34-B141DB9A1A64" dmnElementRef="_7F9F3286-5634-4EB7-AA34-B141DB9A1A64">
+        <di:waypoint x="133.5981308411215" y="347.3421052631579"/>
+        <di:waypoint x="208.59813084112147" y="346.68421052631584"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_40CC9D7F-58FE-46C7-A279-06EC9B0A2CD9" dmnElementRef="_40CC9D7F-58FE-46C7-A279-06EC9B0A2CD9">
+        <di:waypoint x="1079" y="341"/>
+        <di:waypoint x="970" y="341"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_810922CF-C901-4A01-8238-BEB640B5E499-AUTO-TARGET" dmnElementRef="_810922CF-C901-4A01-8238-BEB640B5E499">
+        <di:waypoint x="976" y="139.3421052631579"/>
+        <di:waypoint x="875.2990654205607" y="198"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3BF81977-9670-4954-8372-68990452137D" dmnElementRef="_3BF81977-9670-4954-8372-68990452137D">
+        <di:waypoint x="1104" y="198.3421052631579"/>
+        <di:waypoint x="925.2990654205607" y="223"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_166F6334-FC11-4C30-97F3-05175E80A7F4-AUTO-TARGET" dmnElementRef="_166F6334-FC11-4C30-97F3-05175E80A7F4">
+        <di:waypoint x="356.5981308411215" y="136.3421052631579"/>
+        <di:waypoint x="331.5981308411215" y="240.68421052631578"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_79BD48AF-E479-49A8-94EF-2E4C2CD02253" dmnElementRef="_79BD48AF-E479-49A8-94EF-2E4C2CD02253">
+        <di:waypoint x="187.57009345794393" y="216.6842105263158"/>
+        <di:waypoint x="281.5981308411215" y="215.68421052631578"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_BAAFAE56-FCB8-4F70-8CD5-6E78BA45F0B2-AUTO-TARGET" dmnElementRef="_BAAFAE56-FCB8-4F70-8CD5-6E78BA45F0B2">
+        <di:waypoint x="356.5981308411215" y="136.3421052631579"/>
+        <di:waypoint x="392.29906542056074" y="82.6842105263158"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F3E193C6-79C0-4514-A3A7-B68B8B36EF9D-AUTO-TARGET" dmnElementRef="_F3E193C6-79C0-4514-A3A7-B68B8B36EF9D">
+        <di:waypoint x="976" y="139.3421052631579"/>
+        <di:waypoint x="392.29906542056074" y="82.6842105263158"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_91D7D492-E4BA-49B8-9410-CEEED86A9BCE" dmnElementRef="_91D7D492-E4BA-49B8-9410-CEEED86A9BCE">
+        <di:waypoint x="177.5981308411215" y="57.684210526315795"/>
+        <di:waypoint x="342.29906542056074" y="57.684210526315795"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_B115B796-F79D-409A-9CC4-17ED1DA06C75" dmnElementRef="_B115B796-F79D-409A-9CC4-17ED1DA06C75">
+        <di:waypoint x="188.5981308411215" y="140.3421052631579"/>
+        <di:waypoint x="356.5981308411215" y="136.3421052631579"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_98F3FAB1-7B30-4B4A-82B8-8E2F376A98CF-AUTO-SOURCE" dmnElementRef="_98F3FAB1-7B30-4B4A-82B8-8E2F376A98CF">
+        <di:waypoint x="1104" y="173.3421052631579"/>
+        <di:waypoint x="1026" y="139.3421052631579"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_46116A42-A662-43A3-83E7-D0281B6170C1" dmnElementRef="_46116A42-A662-43A3-83E7-D0281B6170C1">
+        <di:waypoint x="1104" y="41.684210526315795"/>
+        <di:waypoint x="983" y="57.684210526315795"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_B0E4DC18-C8E7-404A-A277-E8DE4351C6F1" dmnElementRef="_B0E4DC18-C8E7-404A-A277-E8DE4351C6F1">
+        <di:waypoint x="481" y="216"/>
+        <di:waypoint x="776" y="88"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_138D8613-6F6F-4031-BBD6-F231D5FB4B4F-AUTO-TARGET" dmnElementRef="_138D8613-6F6F-4031-BBD6-F231D5FB4B4F">
+        <di:waypoint x="825.5" y="159.6842105263158"/>
+        <di:waypoint x="776" y="88"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_AB61CA95-74D9-4795-8F50-F5E56C453ED5-AUTO-TARGET" dmnElementRef="_AB61CA95-74D9-4795-8F50-F5E56C453ED5">
+        <di:waypoint x="684.2990654205607" y="519"/>
+        <di:waypoint x="776" y="88"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_677B3704-64D2-43B0-ACB1-B94659528C93-AUTO-TARGET" dmnElementRef="_677B3704-64D2-43B0-ACB1-B94659528C93">
+        <di:waypoint x="933" y="57.684210526315795"/>
+        <di:waypoint x="776" y="38"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+    <dmndi:DMNDiagram id="_9A5FBEF9-E639-4C1B-B84C-F3FC536F7CA6" name="new-diagram">
+      <di:extension>
+        <kie:ComponentsWidthsExtension/>
+      </di:extension>
+    </dmndi:DMNDiagram>
+    <dmndi:DMNDiagram id="_490BF76A-DC1A-4E73-9576-269D2AD6C54B" name="new-diagram-2">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_A5CFAFCE-4B5B-474A-9C6A-BF3F17D222FF"/>
+          <kie:ComponentWidths dmnElementRef="_229252B7-5A66-4544-B09E-67AACBC4EFA1">
+            <kie:width>50</kie:width>
+            <kie:width>135</kie:width>
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9461AB55-4B47-484A-BAD9-E82474DCA89F">
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_764817AE-16AC-4D9C-BB9D-8DE68FD7B2AC">
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_31DD216D-3E16-4B05-8253-EE28927C8FBC">
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_EB9B482A-9A84-4062-930D-F2BC767F5BC7">
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A51C80E6-4C73-43CB-AF1A-A810C35B36D6">
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E4F45BD4-296F-4102-86D4-A08774909588">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>119</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>303</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BE899C8F-10EB-43FC-B754-C50FE2A39781">
+            <kie:width>992</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D99F2FBC-3E85-499F-A73E-A1F5EB29A922">
+            <kie:width>50</kie:width>
+            <kie:width>1197</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-new-diagram-2-_E6E816B0-28DD-4798-932F-A0E1FB51C1E2" dmnElementRef="_E6E816B0-28DD-4798-932F-A0E1FB51C1E2" isCollapsed="false">
+        <dc:Bounds x="334" y="322" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-new-diagram-2-_7023505C-940A-411D-AD22-30C52E7DFB46" dmnElementRef="_7023505C-940A-411D-AD22-30C52E7DFB46" isCollapsed="false">
+        <dc:Bounds x="208.59813084112147" y="321.68421052631584" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-new-diagram-2-_CB22F2E6-F0A3-420F-A916-50C9C0661DD1-AUTO-TARGET" dmnElementRef="_CB22F2E6-F0A3-420F-A916-50C9C0661DD1">
+        <di:waypoint x="258.5981308411215" y="346.68421052631584"/>
+        <di:waypoint x="334" y="347"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

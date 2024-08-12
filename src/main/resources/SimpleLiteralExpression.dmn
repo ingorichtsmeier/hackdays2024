@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0p4qb1n" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="PersonDescriptionExpression" name="Person Description">
+    <variable id="InformationItem_0p0wdvk" name="Description" typeRef="string" />
+    <informationRequirement id="InformationRequirement_0edish8">
+      <requiredInput href="#InputData_1vmgw31" />
+    </informationRequirement>
+    <literalExpression id="LiteralExpression_1ssyawq">
+      <text>if (Person.Gender = "Male") then Person.Name + " is a dad of " + string(decimal(Person.Children,0)) + " children." else if (Person.Gender = "Female") then Person.Name + " is a mother of " + string(decimal(Person.Children,0)) + " children." else ""</text>
+    </literalExpression>
+  </decision>
+  <inputData id="InputData_1vmgw31" name="Person" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_11e4p2m" dmnElementRef="PersonDescriptionExpression">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_109tpyl" dmnElementRef="InputData_1vmgw31">
+        <dc:Bounds height="45" width="125" x="187" y="337" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_19owgw8" dmnElementRef="InformationRequirement_0edish8">
+        <di:waypoint x="250" y="337" />
+        <di:waypoint x="250" y="200" />
+        <di:waypoint x="250" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
